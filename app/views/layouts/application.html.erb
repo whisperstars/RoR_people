@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>People</title>
+    
+    <meta charset="utf-8">
+
+    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+    
+    <link rel="stylesheet" href="app/style.css">
+
+    <script type="text/javascript" src="app/lib/underscore.js"></script>
+    <script type="text/javascript" src="app/lib/backbone.js"></script>
+    <script type="text/javascript" src="app/lib/backbone-mediator.js"></script>
+
+    <script type="text/javascript" src="app/person.js"></script>
+    <script type="text/javascript" src="app/group.js"></script>
+
+    <script type="text/javascript" src="app/personItemView.js"></script>
+    <script type="text/javascript" src="app/groupView.js"></script>
+    <script type="text/javascript" src="app/personEditView.js"></script>
+    <script type="text/javascript" src="app/pageView.js"></script>
+
+    <script type="text/javascript" src="app/main.js"></script>
+
+    <!--TEMPLATES-->
+    <script type="text/html" id="PageView">
+        <div class="list_page"></div>
+        <div class="edit_page hide"></div>
+    </script>
+    
+    <script type="text/html" id="PersonEditView">
+        <input type="text" class="name" placeholder="name" value="<%%= name %>"/>
+        <button class="set_name_btn">set</button>
+        <button class="cancel_btn">cancel</button>
+    </script>
+
+    <script type="text/html" id="PersonItemView">
+        <td><%%= name %></td>
+        <td><button class="edit_btn btn">Edit</button><button class="delete_btn btn">Delete</button></td>
+    </script>
+
+    <script type="text/html" id="GroupView">
+        <table class="group_list"></table>
+        <button class="add_btn btn">Add</button>
+    </script>
+</head>
+<body>
+
+<%= yield %>
+
+</body>
+</html>
