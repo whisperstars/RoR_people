@@ -1,4 +1,4 @@
-var Group = Backbone.Collection.extend({
+var PersonCollection = Backbone.Collection.extend({
 
     url : 'people',
 

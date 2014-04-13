@@ -1,0 +1,27 @@
+.hide {
+    display: none;
+}
+
+.active {
+    text-decoration: underline;
+}
+
+.success_text {
+    color: #5cb85c;
+}
+
+.warning_text {
+    color: #f0ad4e;
+}
+
+.danger_text {
+    color: #d9534f;
+}
+
+.primary_text {
+    color: #428bca;
+}
+
+.gray_text {
+    color: #999;
+}

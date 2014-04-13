@@ -1,27 +1,27 @@
-var GroupView = Backbone.View.extend({
+var PersonCollectionView = Backbone.View.extend({
 
     events: {
        'click .add_btn': 'personAddStart'
     },
 
     subscriptions: {
-        'person:add_finish': 'personAddFinish'
+        'PersonCollectionView:personAddFinish': 'personAddFinish'
     },
 
     initialize: function() {
-        this.template = _.template($('#GroupView').html());
+        this.template = _.template($('#PersonCollectionView').html());
         
         this.collection.on('sync', this.render, this);
     },
 
     render: function() {
 		this.$el.html(this.template);
-		this.collection.each(this.renderItem, this);		
+		this.collection.each(this.renderOne, this);		
 
         return this;
     },
 
-    renderItem: function(person) {
+    renderOne: function(person) {
         var view = new PersonItemView({
                 'tagName': 'tr',
                 'model': person
@@ -31,7 +31,7 @@ var GroupView = Backbone.View.extend({
     },
 
     personAddStart: function() {
-        Backbone.Mediator.pub('person:add_start');
+        Backbone.Mediator.pub('PersonEditView:personAdd');
     },
 
     personAddFinish: function(person) {
@@ -40,7 +40,8 @@ var GroupView = Backbone.View.extend({
         this.collection.add(person.toJSON());
         last_person = this.collection.last();
         
-        this.renderItem(last_person);
-        last_person.save(last_person.toJSON());
+        last_person.save();
+
+        this.renderOne(last_person);
     }
 });

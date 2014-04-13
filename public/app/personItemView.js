@@ -1,6 +1,7 @@
 var PersonItemView = Backbone.View.extend({
 
     events: {
+        'click .preview_btn': 'personPreview',
         'click .edit_btn': 'personEditStart',
         'click .delete_btn': 'personDelete'
     },
@@ -17,13 +18,17 @@ var PersonItemView = Backbone.View.extend({
         return this;
     },
 
+    personPreview: function() {
+        Backbone.Mediator.pub('PersonView:personPreview', this.model);
+    },
+
     personEditStart: function() {
-        Backbone.Mediator.pub('person:edit_start', this.model);
+        Backbone.Mediator.pub('PersonEditView:personEdit', this.model);
     },
 
     personDelete: function() {
-        this.model.destroy();
         this.model.off();
+        this.model.destroy();
         this.remove();
     }
 });

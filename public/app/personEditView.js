@@ -1,12 +1,12 @@
 var PersonEditView = Backbone.View.extend({
 
     events: {
-        'click .set_name_btn': 'saveModel'
+        'click .preview_btn': 'previewPerson'
     },
 
     subscriptions: {
-        'person:add_start': 'personAdd',
-        'person:edit_start': 'personEdit'
+        'PersonEditView:personAdd': 'personAdd',
+        'PersonEditView:personEdit': 'personEdit'
     },
 
     initialize: function() {
@@ -19,29 +19,36 @@ var PersonEditView = Backbone.View.extend({
         return this;
     },
 
-    saveModel: function() {
-        var is_new = this.model.has('name');
-
-        this.model.set('name', this.$el.find('.name').val());
-
-        if(!is_new) {
-            Backbone.Mediator.pub('person:add_finish', this.model);
-        } else {
-            Backbone.Mediator.pub('person:edit_finish', this.model);
-            this.model.save(this.model.toJSON());
-        }
-    },
-
     personAdd: function() {
         this.setModel(new Person());
+        this.render();
     },
 
     personEdit: function(model) {
         this.setModel(model);
+        this.render();
+    },
+
+    previewPerson: function() {
+        var i,
+            keys = [
+                'name',
+                'lastName',
+                'skype',
+                'email',
+                'phone',
+                'age',
+                'sex'
+            ];
+
+        for(i=0; i< keys.length; i++){
+            this.model.set(keys[i], this.$el.find('.' + keys[i]).val());
+        }
+
+        Backbone.Mediator.pub('PersonView:personPreview', this.model);
     },
 
     setModel: function(model) {
         this.model = model;
-        this.render();
     }
 });
