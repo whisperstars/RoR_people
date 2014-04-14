@@ -31,10 +31,5 @@ var PageView = Backbone.View.extend({
     previewPage: function() {
         this.$el.find('.page').addClass('hide');
         this.$el.find('.preview_page').removeClass('hide');
-    },
-
-    togglePage: function() {
-        this.$el.find('.list_page').toggleClass('hide');
-        this.$el.find('.edit_page').toggleClass('hide');
     }
 });

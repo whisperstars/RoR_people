@@ -40,7 +40,6 @@ var PersonCollectionView = Backbone.View.extend({
 
         this.collection.add(person.toJSON());
         last_person = this.collection.last();
-        
         last_person.save();
 
         this.renderOne(last_person);
