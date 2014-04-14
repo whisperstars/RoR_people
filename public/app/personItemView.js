@@ -27,6 +27,8 @@ var PersonItemView = Backbone.View.extend({
     },
 
     personDelete: function() {
+        Backbone.Mediator.pub('PersonCollectionView:personDelete', this.model);
+
         this.model.off();
         this.model.destroy();
         this.remove();

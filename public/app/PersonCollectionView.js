@@ -5,7 +5,8 @@ var PersonCollectionView = Backbone.View.extend({
     },
 
     subscriptions: {
-        'PersonCollectionView:personAddFinish': 'personAddFinish'
+        'PersonCollectionView:personAddFinish': 'personAddFinish',
+        'PersonCollectionView:personDelete': 'personDelete'
     },
 
     initialize: function() {
@@ -43,5 +44,9 @@ var PersonCollectionView = Backbone.View.extend({
         last_person.save();
 
         this.renderOne(last_person);
+    },
+
+    personDelete: function(person) {
+        this.collection.remove(person);
     }
 });
